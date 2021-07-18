@@ -1,12 +1,12 @@
-import React from "react";
-import "./App.css";
+import React from 'react'
+import styles from './App.modules.css'
 
 const App = () => {
   return (
     <div>
-      <h1>Hello World</h1>
+      <h1 className={styles.test}>Hello World</h1>
     </div>
-  );
-};
+  )
+}
 
-export default App;
+export default App
