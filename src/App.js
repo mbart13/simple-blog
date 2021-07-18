@@ -1,11 +1,22 @@
-import React from 'react'
-import styles from './App.modules.css'
+import Header from 'components/Header'
+import { BrowserRouter as Router, Switch, Route } from 'react-router-dom'
+
+import Home from 'pages/Home'
+import Post from 'pages/Post'
 
 const App = () => {
   return (
-    <div>
-      <h1 className={styles.test}>Hello World</h1>
-    </div>
+    <Router>
+      <Header />
+      <Switch>
+        <Route path="/" exact>
+          <Home />
+        </Route>
+        <Route path="/posts/:id">
+          <Post />
+        </Route>
+      </Switch>
+    </Router>
   )
 }
 
