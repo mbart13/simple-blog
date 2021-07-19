@@ -35,7 +35,7 @@ module.exports = {
     historyApiFallback: true,
   },
   resolve: {
-    extensions: ['.ts', '.js', '*'],
+    extensions: ['.ts', '.js', '.scss'],
     modules: [path.resolve(__dirname, 'src'), 'node_modules'],
   },
 }

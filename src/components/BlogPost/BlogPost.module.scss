@@ -1,0 +1,52 @@
+@use 'styles/variables' as *;
+@use 'styles/mixins' as *;
+
+.blog-post {
+  display: grid;
+  gap: 1rem;
+  grid-template-areas: 'image' 'title' 'date' 'body' 'button';
+
+  @include breakpoint-up('tablet') {
+    grid-template-columns: 1fr 40%;
+    grid-template-areas: 'title image' 'date image' 'body image' 'button image';
+    grid-template-rows: min-content min-content min-content 1fr;
+    column-gap: 4rem;
+  }
+
+  &__image {
+    grid-area: image;
+  }
+
+  &__title {
+    grid-area: title;
+  }
+
+  &__date {
+    grid-area: date;
+    font-size: 0.8125rem;
+    color: $color-accent;
+    display: flex;
+    align-items: center;
+  }
+
+  &__body {
+    grid-area: body;
+  }
+
+  &__button {
+    grid-area: button;
+    background-color: $color-accent;
+    color: $color-white;
+    text-decoration: none;
+    padding: 0.9375rem 1.25rem;
+    transition: background-color 0.2s linear;
+    width: max-content;
+    align-self: end;
+    justify-self: start;
+    line-height: 1;
+    margin-bottom: 1rem;
+    &:hover {
+      background-color: $color-accentHover;
+    }
+  }
+}
