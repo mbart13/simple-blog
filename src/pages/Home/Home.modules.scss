@@ -1,3 +1,7 @@
 .articles-list {
   margin: 5rem 0 3rem;
+
+  & > * + * {
+    margin-top: 5rem;
+  }
 }

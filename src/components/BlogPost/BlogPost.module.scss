@@ -19,6 +19,7 @@
 
   &__title {
     grid-area: title;
+    line-height: 1.1;
   }
 
   &__date {
@@ -41,7 +42,7 @@
     padding: 0.9375rem 1.25rem;
     transition: background-color 0.2s linear;
     width: max-content;
-    align-self: end;
+    align-self: start;
     justify-self: start;
     line-height: 1;
     margin-bottom: 1rem;

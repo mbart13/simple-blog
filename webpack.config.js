@@ -40,7 +40,7 @@ module.exports = {
       template: './public/index.html',
     }),
     new CopyPlugin({
-      patterns: [{ from: 'public', to: 'public' }],
+      patterns: [{ from: 'public/assets', to: 'public/assets' }],
     }),
   ],
   devServer: {
