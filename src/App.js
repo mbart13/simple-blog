@@ -4,7 +4,6 @@ import { BrowserRouter as Router, Switch, Route } from 'react-router-dom'
 import Header from 'components/Header'
 import Home from 'pages/Home'
 import Article from 'pages/Article'
-import ScrollToTop from './components/ScrollToTop'
 
 const App = () => {
   const [posts, setPosts] = useState([])
@@ -17,7 +16,6 @@ const App = () => {
   return (
     <Router>
       <Header />
-      {/* <ScrollToTop /> */}
       <main className="container">
         <Switch>
           <Route path="/" exact>

@@ -1,26 +1,35 @@
 import { useParams, useHistory, useLocation } from 'react-router-dom'
-import { useEffect } from 'react'
+import { useEffect, useState } from 'react'
 import { BiCalendar } from 'react-icons/bi'
 import { FaBookmark } from 'react-icons/fa'
 
 import styles from './Article.module.scss'
 import { capitalizeFirstLetter } from 'utils/helpers'
-import Bookmark from '../../components/Bookmark'
+import Bookmark from 'components/Bookmark'
+import Comments from 'components/Comments'
 
 const Article = ({ posts }) => {
+  const [comments, setComments] = useState([])
   const { id } = useParams()
   const post = posts.find(post => post.id === +id)
+  const url = `https://jsonplaceholder.typicode.com/posts/${id}/comments`
 
   useEffect(() => {
     window.scrollTo(0, 0)
   }, [])
 
+  useEffect(() => {
+    fetch(url)
+      .then(response => response.json())
+      .then(data => setComments(data))
+  }, [url])
+  console.log(comments)
   return (
     <>
       <article className={styles.article}>
-        <h1 className={styles['article__title']}>
+        <h2 className={styles['article__title']}>
           {capitalizeFirstLetter(post.title)}
-        </h1>
+        </h2>
         <div className={styles['article__date']}>
           <BiCalendar />
           <p>July 19, 2021</p>
@@ -73,8 +82,9 @@ const Article = ({ posts }) => {
           Tortor id aliquet lectus proin nibh. Tellus at urna condimentum
           mattis.
         </p>
+        <Bookmark />
       </article>
-      <Bookmark />
+      <Comments comments={comments} />
     </>
   )
 }
