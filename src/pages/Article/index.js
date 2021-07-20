@@ -10,6 +10,7 @@ import styles from './Article.module.scss'
 import { capitalizeFirstLetter } from 'utils/helpers'
 import Bookmark from 'components/Bookmark'
 import Comments from 'components/Comments'
+import Spinner from 'components/Spinner'
 
 const Article = () => {
   const dispatch = useDispatch()
@@ -17,6 +18,7 @@ const Article = () => {
   const { comments, status } = useSelector(commentsSelector)
   const { id } = useParams()
   const post = posts.find(post => post.id === +id)
+
   const isSaved = Boolean(
     useSelector(bookmarksSelector).find(post => post.id === +id)
   )
@@ -37,7 +39,7 @@ const Article = () => {
     }
 
     if (status === 'idle' || status === 'pending') {
-      return <p>Loading</p>
+      return <Spinner />
     }
 
     if (status === 'resolved') {

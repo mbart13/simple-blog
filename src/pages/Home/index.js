@@ -3,16 +3,18 @@ import BlogPost from 'components/BlogPost'
 import { postsSelector } from 'store/postsSlice'
 import styles from './Home.modules.scss'
 import cn from 'classnames'
+import Spinner from 'components/Spinner'
+import ErrorFallback from 'components/ErrorFallback'
 
 const Home = () => {
   const { posts, status } = useSelector(postsSelector)
 
   if (status === 'rejected') {
-    return <p>Something went wrong</p>
+    return <ErrorFallback />
   }
 
   if (status === 'idle' || status === 'pending') {
-    return <p>Loading</p>
+    return <Spinner />
   }
 
   if (status === 'resolved') {

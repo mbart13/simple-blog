@@ -1,6 +1,3 @@
-import React from 'react'
-import { FaThumbsUp, FaRegThumbsUp } from 'react-icons/fa'
-
 import styles from './Comments.module.scss'
 
 const Comments = ({ comments }) => {
