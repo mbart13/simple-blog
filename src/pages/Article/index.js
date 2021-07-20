@@ -2,28 +2,44 @@ import { useParams, useHistory, useLocation } from 'react-router-dom'
 import { useEffect, useState } from 'react'
 import { BiCalendar } from 'react-icons/bi'
 import { FaBookmark } from 'react-icons/fa'
+import { useDispatch, useSelector } from 'react-redux'
 
+import { fetchComments, commentsSelector } from 'store/commentsSlice'
+import { postsSelector } from 'store/postsSlice'
 import styles from './Article.module.scss'
 import { capitalizeFirstLetter } from 'utils/helpers'
 import Bookmark from 'components/Bookmark'
 import Comments from 'components/Comments'
 
-const Article = ({ posts }) => {
-  const [comments, setComments] = useState([])
+const Article = () => {
+  const dispatch = useDispatch()
+  const { posts } = useSelector(postsSelector)
+  const { comments, status } = useSelector(commentsSelector)
   const { id } = useParams()
   const post = posts.find(post => post.id === +id)
-  const url = `https://jsonplaceholder.typicode.com/posts/${id}/comments`
-
+  console.log(comments)
   useEffect(() => {
     window.scrollTo(0, 0)
   }, [])
 
   useEffect(() => {
-    fetch(url)
-      .then(response => response.json())
-      .then(data => setComments(data))
-  }, [url])
-  console.log(comments)
+    dispatch(fetchComments(id))
+  }, [dispatch, id])
+
+  const renderComments = () => {
+    if (status === 'rejected') {
+      return <p>Couldn't fetch comments</p>
+    }
+
+    if (status === 'idle' || status === 'pending') {
+      return <p>Loading</p>
+    }
+
+    if (status === 'resolved') {
+      return <Comments comments={comments} />
+    }
+  }
+
   return (
     <>
       <article className={styles.article}>
@@ -84,7 +100,7 @@ const Article = ({ posts }) => {
         </p>
         <Bookmark />
       </article>
-      <Comments comments={comments} />
+      {renderComments()}
     </>
   )
 }

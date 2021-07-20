@@ -4,6 +4,7 @@ import { FaThumbsUp, FaRegThumbsUp } from 'react-icons/fa'
 import styles from './Comments.module.scss'
 
 const Comments = ({ comments }) => {
+  if (!comments) return null
   return (
     <section className={styles['comments-section']}>
       <h3 className={styles['comments-section__heading']}>
