@@ -40,7 +40,10 @@ module.exports = {
       template: './public/index.html',
     }),
     new CopyPlugin({
-      patterns: [{ from: 'public/assets', to: 'public/assets' }],
+      patterns: [
+        { from: 'public/assets', to: 'public/assets' },
+        { from: '_redirects' },
+      ],
     }),
   ],
   devServer: {

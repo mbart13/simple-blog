@@ -16,6 +16,7 @@ const Article = () => {
   const { posts } = useSelector(postsSelector)
   const { comments, status } = useSelector(commentsSelector)
   const { id } = useParams()
+  console.log(id)
   const post = posts.find(post => post.id === +id)
   const isSaved = Boolean(
     useSelector(bookmarksSelector).find(post => post.id === +id)
@@ -28,6 +29,8 @@ const Article = () => {
   useEffect(() => {
     dispatch(fetchComments(id))
   }, [dispatch, id])
+
+  if (!post) return null
 
   const renderComments = () => {
     if (status === 'rejected') {
