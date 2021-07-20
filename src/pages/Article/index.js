@@ -1,26 +1,54 @@
-import { useParams, useHistory, useLocation } from 'react-router-dom'
+import { useParams } from 'react-router-dom'
 import { useEffect } from 'react'
 import { BiCalendar } from 'react-icons/bi'
-import { FaBookmark } from 'react-icons/fa'
+import { useDispatch, useSelector } from 'react-redux'
 
+import { fetchComments, commentsSelector } from 'store/commentsSlice'
+import { postsSelector } from 'store/postsSlice'
+import { toggleBookmark, bookmarksSelector } from 'store/userSlice'
 import styles from './Article.module.scss'
 import { capitalizeFirstLetter } from 'utils/helpers'
-import Bookmark from '../../components/Bookmark'
+import Bookmark from 'components/Bookmark'
+import Comments from 'components/Comments'
 
-const Article = ({ posts }) => {
+const Article = () => {
+  const dispatch = useDispatch()
+  const { posts } = useSelector(postsSelector)
+  const { comments, status } = useSelector(commentsSelector)
   const { id } = useParams()
   const post = posts.find(post => post.id === +id)
+  const isSaved = Boolean(
+    useSelector(bookmarksSelector).find(post => post.id === +id)
+  )
 
   useEffect(() => {
     window.scrollTo(0, 0)
   }, [])
 
+  useEffect(() => {
+    dispatch(fetchComments(id))
+  }, [dispatch, id])
+
+  const renderComments = () => {
+    if (status === 'rejected') {
+      return <p>Couldn't fetch comments</p>
+    }
+
+    if (status === 'idle' || status === 'pending') {
+      return <p>Loading</p>
+    }
+
+    if (status === 'resolved') {
+      return <Comments comments={comments} />
+    }
+  }
+
   return (
     <>
       <article className={styles.article}>
-        <h1 className={styles['article__title']}>
+        <h2 className={styles['article__title']}>
           {capitalizeFirstLetter(post.title)}
-        </h1>
+        </h2>
         <div className={styles['article__date']}>
           <BiCalendar />
           <p>July 19, 2021</p>
@@ -73,8 +101,12 @@ const Article = ({ posts }) => {
           Tortor id aliquet lectus proin nibh. Tellus at urna condimentum
           mattis.
         </p>
+        <Bookmark
+          isSaved={isSaved}
+          handleClick={() => dispatch(toggleBookmark(post))}
+        />
       </article>
-      <Bookmark />
+      {renderComments()}
     </>
   )
 }

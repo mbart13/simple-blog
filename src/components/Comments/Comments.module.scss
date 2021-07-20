@@ -1,0 +1,47 @@
+@use 'styles/variables' as *;
+
+.comments-section {
+  margin: 4rem 0 3rem;
+
+  &__heading {
+    font-size: 1.4rem;
+  }
+}
+
+.comments {
+  margin-top: 3rem;
+  padding-left: 2.5rem;
+
+  & > * + * {
+    margin-top: 2rem;
+  }
+}
+
+.comment {
+  max-width: 43.75rem;
+  padding-bottom: 1rem;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+
+  &__footer {
+    padding-top: 2rem;
+    display: flex;
+    justify-content: space-between;
+    font-size: 0.875rem;
+    color: $color-accent;
+  }
+
+  &__body {
+    margin-top: 0.3rem;
+  }
+
+  &__reply-btn {
+    color: $color-accent;
+    background: none;
+    border: none;
+    cursor: pointer;
+
+    &:hover {
+      text-decoration: underline;
+    }
+  }
+}

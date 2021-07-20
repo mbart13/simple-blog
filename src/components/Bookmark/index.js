@@ -1,23 +1,16 @@
-import { useState } from 'react'
 import { FaBookmark, FaRegBookmark } from 'react-icons/fa'
-import cn from 'classnames'
 
 import styles from './Bookmark.module.scss'
 
-const Bookmark = () => {
-  const [saved, setSaved] = useState(false)
-
-  const handleClick = () => {
-    setSaved(prevState => !prevState)
-  }
+const Bookmark = ({ isSaved, handleClick }) => {
   return (
-    <button className={cn(styles['bookmark-btn'])} onClick={handleClick}>
-      {!saved ? <FaRegBookmark /> : <FaBookmark />}{' '}
-      {!saved ? (
-        <span>Add to Favorites</span>
-      ) : (
-        <span>Remove to Favorites</span>
-      )}
+    <button
+      className={styles['bookmark-btn']}
+      onClick={handleClick}
+      aria-live="polite"
+    >
+      {!isSaved ? <FaRegBookmark /> : <FaBookmark />}{' '}
+      {!isSaved ? <span>Save</span> : <span>Saved!</span>}
     </button>
   )
 }
