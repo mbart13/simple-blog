@@ -1,11 +1,11 @@
-import { useParams, useHistory, useLocation } from 'react-router-dom'
-import { useEffect, useState } from 'react'
+import { useParams } from 'react-router-dom'
+import { useEffect } from 'react'
 import { BiCalendar } from 'react-icons/bi'
-import { FaBookmark } from 'react-icons/fa'
 import { useDispatch, useSelector } from 'react-redux'
 
 import { fetchComments, commentsSelector } from 'store/commentsSlice'
 import { postsSelector } from 'store/postsSlice'
+import { toggleBookmark, bookmarksSelector } from 'store/userSlice'
 import styles from './Article.module.scss'
 import { capitalizeFirstLetter } from 'utils/helpers'
 import Bookmark from 'components/Bookmark'
@@ -17,7 +17,10 @@ const Article = () => {
   const { comments, status } = useSelector(commentsSelector)
   const { id } = useParams()
   const post = posts.find(post => post.id === +id)
-  console.log(comments)
+  const isSaved = Boolean(
+    useSelector(bookmarksSelector).find(post => post.id === +id)
+  )
+
   useEffect(() => {
     window.scrollTo(0, 0)
   }, [])
@@ -98,7 +101,10 @@ const Article = () => {
           Tortor id aliquet lectus proin nibh. Tellus at urna condimentum
           mattis.
         </p>
-        <Bookmark />
+        <Bookmark
+          isSaved={isSaved}
+          handleClick={() => dispatch(toggleBookmark(post))}
+        />
       </article>
       {renderComments()}
     </>

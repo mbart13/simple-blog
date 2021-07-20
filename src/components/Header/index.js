@@ -6,7 +6,7 @@ const Header = () => {
       <div className="container">
         <h1 className={styles['header__title']}>Overreacted</h1>
         <p className={styles['header__description']}>
-          Blog about React and all things tech
+          Blog about React and all things related
         </p>
       </div>
     </header>
