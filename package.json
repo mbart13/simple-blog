@@ -4,7 +4,7 @@
   "description": "",
   "scripts": {
     "start": "webpack serve",
-    "build": "SET NODE_ENV='production' && webpack",
+    "build": "NODE_ENV='production' webpack",
     "lint": "eslint --fix --ext .jsx,.js,.ts,.tsx ."
   },
   "author": "Michal Bartosik",
