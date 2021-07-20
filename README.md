@@ -1,4 +1,4 @@
-## Cryptocurrency API
+## Simple Blog
 
 ### Links
 
