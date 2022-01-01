@@ -1,8 +1,7 @@
 import { useEffect } from 'react'
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom'
 import { useDispatch } from 'react-redux'
-import { fetchPosts } from 'store/postsSlice'
-
+import { fetchPosts } from './actions/postsActions'
 import Header from 'components/Header'
 import Home from 'pages/Home'
 import Article from 'pages/Article'

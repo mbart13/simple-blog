@@ -1,13 +1,12 @@
 import { useSelector } from 'react-redux'
 import BlogPost from 'components/BlogPost'
-import { postsSelector } from 'store/postsSlice'
 import styles from './Home.modules.scss'
 import cn from 'classnames'
 import Spinner from 'components/Spinner'
 import ErrorFallback from 'components/ErrorFallback'
 
 const Home = () => {
-  const { posts, status } = useSelector(postsSelector)
+  const { posts, status } = useSelector(state => state.posts)
 
   if (status === 'rejected') {
     return <ErrorFallback />

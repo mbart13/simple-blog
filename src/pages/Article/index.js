@@ -3,10 +3,8 @@ import { useEffect } from 'react'
 import { BiCalendar } from 'react-icons/bi'
 import { useDispatch, useSelector } from 'react-redux'
 
-import { fetchComments, commentsSelector } from 'store/commentsSlice'
-import { postsSelector } from 'store/postsSlice'
-import { toggleBookmark, bookmarksSelector } from 'store/userSlice'
 import styles from './Article.module.scss'
+import { fetchComments } from '../../actions/commentsActions'
 import { capitalizeFirstLetter } from 'utils/helpers'
 import Bookmark from 'components/Bookmark'
 import Comments from 'components/Comments'
@@ -14,24 +12,18 @@ import Spinner from 'components/Spinner'
 
 const Article = () => {
   const dispatch = useDispatch()
-  const { posts } = useSelector(postsSelector)
-  const { comments, status } = useSelector(commentsSelector)
+  const { posts } = useSelector(state => state.posts)
+  const { comments, status } = useSelector(state => state.comments)
   const { id } = useParams()
   const post = posts.find(post => post.id === +id)
 
-  const isSaved = Boolean(
-    useSelector(bookmarksSelector).find(post => post.id === +id)
-  )
-
-  useEffect(() => {
-    window.scrollTo(0, 0)
-  }, [])
+  // useEffect(() => {
+  //   window.scrollTo(0, 0)
+  // }, [])
 
   useEffect(() => {
     dispatch(fetchComments(id))
   }, [dispatch, id])
-
-  if (!post) return null
 
   const renderComments = () => {
     if (status === 'rejected') {
@@ -51,14 +43,14 @@ const Article = () => {
     <>
       <article className={styles.article}>
         <h2 className={styles['article__title']}>
-          {capitalizeFirstLetter(post.title)}
+          {capitalizeFirstLetter(post?.title || '')}
         </h2>
         <div className={styles['article__date']}>
           <BiCalendar />
           <p>July 19, 2021</p>
         </div>
         <figure>
-          <img src={`/public/assets/images/${post.id}.jpg`} alt="" />
+          <img src={`/public/assets/images/${post?.id}.jpg`} alt="" />
           <figcaption className={styles['article__caption']}>
             Lorem ipsum dolor sit amet consectetur adipisicing elit.
           </figcaption>
@@ -105,10 +97,7 @@ const Article = () => {
           Tortor id aliquet lectus proin nibh. Tellus at urna condimentum
           mattis.
         </p>
-        <Bookmark
-          isSaved={isSaved}
-          handleClick={() => dispatch(toggleBookmark(post))}
-        />
+        <Bookmark />
       </article>
       {renderComments()}
     </>

@@ -2,11 +2,11 @@ import { FaBookmark, FaRegBookmark } from 'react-icons/fa'
 
 import styles from './Bookmark.module.scss'
 
-const Bookmark = ({ isSaved, handleClick }) => {
+const Bookmark = ({ isSaved }) => {
   return (
     <button
       className={styles['bookmark-btn']}
-      onClick={handleClick}
+      onClick={() => alert('Not implemented')}
       aria-live="polite"
     >
       {!isSaved ? <FaRegBookmark /> : <FaBookmark />}{' '}
