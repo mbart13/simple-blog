@@ -1,6 +1,6 @@
 import { useSelector } from 'react-redux'
 import BlogPost from 'components/BlogPost'
-import styles from './Home.modules.scss'
+import styles from './Home.module.scss'
 import cn from 'classnames'
 import Spinner from 'components/Spinner'
 import ErrorFallback from 'components/ErrorFallback'

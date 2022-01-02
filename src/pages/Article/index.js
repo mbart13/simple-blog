@@ -1,5 +1,5 @@
 import { useParams } from 'react-router-dom'
-import { useEffect } from 'react'
+import { useLayoutEffect, useEffect } from 'react'
 import { BiCalendar } from 'react-icons/bi'
 import { useDispatch, useSelector } from 'react-redux'
 
@@ -17,13 +17,15 @@ const Article = () => {
   const { id } = useParams()
   const post = posts.find(post => post.id === +id)
 
-  // useEffect(() => {
-  //   window.scrollTo(0, 0)
-  // }, [])
+  useLayoutEffect(() => {
+    window.scrollTo(0, 0)
+  }, [])
 
   useEffect(() => {
     dispatch(fetchComments(id))
   }, [dispatch, id])
+
+  if (!post) return <Spinner />
 
   const renderComments = () => {
     if (status === 'rejected') {
