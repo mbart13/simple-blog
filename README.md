@@ -1,4 +1,4 @@
-## Cryptocurrency API
+## Simple Blog
 
 ### Links
 
@@ -6,18 +6,18 @@
 
 ### Setup
 
-Aby uruchomić projekt lokalnie:
+To run project locally:
 
 ```
 yarn && yarn start
 ```
 
-lub
+or
 
 ```
 npm install && npm start
 ```
 
-## Notka
+### About
 
-Nie zdążyłem zaimplementować wszystkich wymagań (dodawania komentarzy do ulubionych), przydałoby się też zapisywać listę z zakladkami np. do local storage. W tym momencie, gdy strona zostanie odświeżona, zakładki z ulubionymi postami użytkownika przepadają.
+This was one of recruitment task I did when I was job hunting. It was supposed to be a blog on any subject, but built with React, Redux, CSS modules and BEM naming convention. Long story short, they didn't like my solution ;(
