@@ -16,7 +16,7 @@ const Comments = ({ comments }) => {
             </div>
             <p className={styles['comment__body']}>{comment.body}</p>
             <div className={styles['comment__footer']}>
-              <time>July 219, 2021 2:39pm </time>
+              <time>July 19, 2021 2:39pm </time>
               <button className={styles['comment__reply-btn']}>Reply</button>
             </div>
           </li>
