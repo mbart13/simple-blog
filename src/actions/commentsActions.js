@@ -9,19 +9,17 @@ export const getCommentsSuccess = comments => ({
 })
 export const getCommentsFailure = () => ({ type: GET_COMMENTS_FAILURE })
 
-export function fetchComments(postId) {
-  return async dispatch => {
-    dispatch(getComments())
+export const fetchComments = postId => async dispatch => {
+  dispatch(getComments())
 
-    try {
-      const response = await fetch(
-        `https://jsonplaceholder.typicode.com/comments?postId=${postId}`
-      )
-      const data = await response.json()
+  try {
+    const response = await fetch(
+      `https://jsonplaceholder.typicode.com/comments?postId=${postId}`
+    )
+    const data = await response.json()
 
-      dispatch(getCommentsSuccess(data))
-    } catch (error) {
-      dispatch(getCommentsFailure())
-    }
+    dispatch(getCommentsSuccess(data))
+  } catch (error) {
+    dispatch(getCommentsFailure())
   }
 }
